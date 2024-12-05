@@ -78,8 +78,12 @@ def classifier(X_train_pca, y_train, X_test_pca, y_test, label_names):
     # Predict on test data
     y_pred = svm.predict(X_test_pca)
 
+    # Get unique classes from y_test
+    unique_classes = np.unique(y_test)
+    filtered_label_names = [label_names[i] for i in unique_classes]
+
     # Evaluate the model
-    print(classification_report(y_test, y_pred, target_names=label_names))
+    print(classification_report(y_test, y_pred, target_names=filtered_label_names))
 
     return y_pred
 
